@@ -4,12 +4,37 @@
         <title> A Party Sobrevive? </title>
         <meta charset="UTF-8">
         <meta name="description" content="Calculadora de encontro que verifica se o grupo de RPG sibrevive ou não e quantos turnos o combate dura.">
-        <link rel="stylesheet" href="/index.css">
-        <link rel="script" href="/index.js">
+        <link rel="stylesheet" href="./index.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="./index.js"></script>
     </head>
     <body>
         <div>
             <h1>A party sobrevive?</h1>
+        </div>
+        <div>
+            <form>
+                <label>Nome do personagem:</label><input type="text" id="nomePersonagem"/> <br/> <br/>
+                <label>Ataque do personagem:</label><input type="number" id="ataquePersonagem"/> <br/> <br/>
+                <label>Dano do personagem:</label><input type="number" id="danoPersonagem"/>
+                <br/>
+                <input type="button" id="btnAddPartyMember" value="Adiciona Personagem">
+            </form>
+            <div id="personagensDaParty">
+
+            </div>
+        </div>
+        <div>
+            <form>
+                <label>Nome do inimigo:</label><input type="text" id="nomeInimigo"/> <br/> <br/>
+                <label>Ataque do inimigo:</label><input type="number" id="ataqueInimigo"/> <br/> <br/>
+                <label>Dano do inimigo:</label><input type="number" id="danoInimigo"/>
+                <br/>
+                <input type="button" id="btnAddInimigo" value="Adiciona Inimigo">
+            </form>
+            <div id="inimigosDaParty">
+
+            </div>
         </div>
     </body>
 </html>

@@ -1,0 +1,22 @@
+h1
+{
+    color: brown;
+}
+
+.divNome
+{
+    width: 50%;
+    float: left;
+}
+
+.divAtaque
+{
+    width: 25%;
+    float: left;
+}
+
+.divDano
+{
+    width: 25%;
+    float: left;
+}
