@@ -58,4 +58,13 @@ $(document).ready(function(){
         }
     });
 
+    $("#botaoCalcular").click(() => {
+        $(`<p> <div> Os personagens têm ${calcularChanceDeVitoria()}% de chance de vencer a batalha. </div> </p>`).appendTo('#relatorioDeCombate');
+    });
+
   });
+
+  function calcularChanceDeVitoria() {
+      return 50
+      
+  }
