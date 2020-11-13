@@ -2,9 +2,20 @@ var personagem = {
     nome: "",
     ataque: 0,
     dano: 0,
+    defesa: 0,
 };
 var party = [];
-var inimigos = [];
+
+var inimigos = {
+    nome: "",
+    ataque: 0,
+    dano: 0,
+    defesa: 0,
+};
+
+var diferencaDeAcerto = [];
+
+var chanceDeAcerto = [];
 
 // document.onload = () => {
 //     button = document.getElementById("btnAddPartyMember").addEventListener('click', addPlayerToPartyFunction);
@@ -21,50 +32,72 @@ $(document).ready(function(){
     $('#nomePersonagem').val("");
     $('#ataquePersonagem').val("");
     $('#danoPersonagem').val("");
+    $('#defesaPersonagem').val("");
+
+    $('#nomeInimigo').val("");
+    $('#ataqueInimigo').val("");
+    $('#danoInimigo').val("");
+    $('#defesaInimigo').val("");
 
     $("#btnAddPartyMember").click(() => {
         if ($('#nomePersonagem').val() != "" )
         {
-            personagem = {
+            novoPersonagem = {
                 nome: $('#nomePersonagem').val(),
                 ataque: $('#ataquePersonagem').val(),
                 dano: $('#danoPersonagem').val(),
+                defesa: $('#defesaPersonagem').val(),
             };
-            party.push(personagem);
-            $(`<p> <div class="divNome"> ${personagem.nome} </div>
-                    <div class="divAtaque"> ${personagem.ataque} </div>
-                    <div class="divDano"> ${personagem.dano} </div> </p>`).appendTo('#personagensDaParty');
+            party.push(novoPersonagem);
+            $(`<p> <div class="divNome"> ${novoPersonagem.nome} </div>
+                    <div class="divAtaque"> ${novoPersonagem.ataque} </div>
+                    <div class="divDano"> ${novoPersonagem.dano} </div>
+                    <div class="divDefesa"> ${novoPersonagem.defesa} </div> </p>`).appendTo('#personagensDaParty');
             $('#nomePersonagem').val("");
             $('#ataquePersonagem').val("");
             $('#danoPersonagem').val("");
-        }
-    });
-
-    $("#btnAddInimigo").click(() => {
-        if ($('#nomeInimigo').val() != "" )
-        {
-            personagem = {
-                nome: $('#nomeInimigo').val(),
-                ataque: $('#ataqueInimigo').val(),
-                dano: $('#danoInimigo').val(),
-            };
-            inimigos.push(personagem);
-            $(`<p> <div class="divNome"> ${personagem.nome} </div>
-                    <div class="divAtaque"> ${personagem.ataque} </div>
-                    <div class="divDano"> ${personagem.dano} </div> </p>`).appendTo('#inimigosDaParty');
-            $('#nomeInimigo').val("");
-            $('#ataqueInimigo').val("");
-            $('#danoInimigo').val("");
+            $('#defesaPersonagem').val("");
         }
     });
 
     $("#botaoCalcular").click(() => {
-        $(`<p> <div> Os personagens têm ${calcularChanceDeVitoria()}% de chance de vencer a batalha. </div> </p>`).appendTo('#relatorioDeCombate');
+        if ($('#nomeInimigo').val() != "" )
+        {
+            inimigos = {
+                nome: $('#nomeInimigo').val(),
+                ataque: $('#ataqueInimigo').val(),
+                dano: $('#danoInimigo').val(),
+                defesa: $('#defesaInimigo').val(),
+            };
+            $(`<p> <div class="divNome"> ${inimigos.nome} </div>
+                    <div class="divAtaque"> ${inimigos.ataque} </div>
+                    <div class="divDano"> ${inimigos.dano} </div>
+                    <div class="divDefesa"> ${inimigos.defesa} </div> </p>`).appendTo('#inimigosDaParty');
+            $('#nomeInimigo').val("");
+            $('#ataqueInimigo').val("");
+            $('#danoInimigo').val("");
+            $('#defesaInimigo').val("");
+        }
+        //$(`<p> <div> Os personagens têm ${calcularChanceDeVitoria()}% de chance de vencer a batalha. </div> </p>`).appendTo('#relatorioDeCombate');
+        $(`<p> <div> <h1 class="tituloRelatorio"> Relatório de combate contra o ${inimigos.nome} </h1> </div> </p>`).appendTo('#relatorioDeCombate');
+
+        calcularDiferencaDeAcerto();
+
+        party.forEach((persona, index) => {
+            $(`<p> <div> O personagem ${persona.nome} e precisa de ${diferencaDeAcerto[index]} ou mais para acertar, resultando em acertos ${chanceDeAcerto[index]}% das vezes. </div> </p>
+                <p> <div> ${d20.roll('4d6-1')} </div> </p> `).appendTo('#relatorioDeCombate');
+        });
+
     });
 
   });
 
-  function calcularChanceDeVitoria() {
-      return 50
-      
+  function calcularDiferencaDeAcerto() {
+  
+      party.forEach((personagemDaVez, index) => {
+          if( (inimigos.defesa - personagemDaVez.ataque) > 0 ){
+            diferencaDeAcerto.push(inimigos.defesa - personagemDaVez.ataque);
+            chanceDeAcerto.push(100*(1 - (diferencaDeAcerto[index]/20)));
+          }
+      });
   }

@@ -7,6 +7,7 @@
         <link rel="stylesheet" href="./index.css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <script src="./index.js"></script>
+        <script src="./d20.js/d20.js"></script>
     </head>
     <body>
         <div>
@@ -15,8 +16,9 @@
         <div>
             <form>
                 <label class="labelDoInput">Nome do personagem:</label><input type="text" id="nomePersonagem"/> <br/> <br/>
-                <label class="labelDoInput">Ataque do personagem:</label><input type="number" pattern="[0-9]*" id="ataquePersonagem"/> <br/> <br/>
-                <label class="labelDoInput">Dano do personagem:</label><input type="number" pattern="[0-9]*" id="danoPersonagem"/>
+                <label class="labelDoInput">Ataque do personagem:</label><input type="number" pattern="[0-9]*d[0-9]*[+|-][0-9]*" id="ataquePersonagem"/> <br/> <br/>
+                <label class="labelDoInput">Dano do personagem:</label><input type="number" pattern="[0-9]*" id="danoPersonagem"/> <br/> <br/>
+                <label class="labelDoInput">Defesa do personagem:</label><input type="number" pattern="[0-9]*" id="defesaPersonagem"/>
                 <br/>
                 <input class="botaoAddPlayer" type="button" id="btnAddPartyMember" value="Adiciona Personagem">
             </form>
@@ -28,18 +30,19 @@
             <form>
                 <label>Nome do inimigo:</label><input type="text" id="nomeInimigo"/> <br/> <br/>
                 <label>Ataque do inimigo:</label><input type="number" id="ataqueInimigo"/> <br/> <br/>
-                <label>Dano do inimigo:</label><input type="number" id="danoInimigo"/>
+                <label>Dano do inimigo:</label><input type="number" id="danoInimigo"/> <br/> <br/>
+                <label>Defesa do inimigo:</label><input type="number" pattern="[0-9]*" id="defesaInimigo"/>
                 <br/>
                 <!--Por enquanto vamos deixar somente um inimigo para possibilitar os cálculos-->
-                <!-- <input type="button" id="btnAddInimigo" value="Adiciona Inimigo">-->
+                <input type="button" class="btnCalcular" id="botaoCalcular" value="Calcular"/>
             </form>
-            <!-- <div id="inimigosDaParty">
+            <div id="inimigosDaParty">
 
-            </div> -->
+            </div>
         </div>
-        <div class="classBotaoCalcular">
+        <!-- <div class="classBotaoCalcular">
             <input type="button" class="btnCalcular" id="botaoCalcular" value="Calcular"/>
-        </div>
+        </div> -->
         <div id="relatorioDeCombate">
 
         </div>
