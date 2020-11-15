@@ -1,6 +1,6 @@
 var personagem = {
     nome: "",
-    ataque: 0,
+    ataque: "",
     dano: 0,
     defesa: 0,
 };
@@ -8,7 +8,7 @@ var party = [];
 
 var inimigos = {
     nome: "",
-    ataque: 0,
+    ataque: "",
     dano: 0,
     defesa: 0,
 };
@@ -84,8 +84,10 @@ $(document).ready(function(){
         calcularDiferencaDeAcerto();
 
         party.forEach((persona, index) => {
-            $(`<p> <div> O personagem ${persona.nome} e precisa de ${diferencaDeAcerto[index]} ou mais para acertar, resultando em acertos ${chanceDeAcerto[index]}% das vezes. </div> </p>
-                <p> <div> ${d20.roll('4d6-1')} </div> </p> `).appendTo('#relatorioDeCombate');
+            $(`<p> <div> O personagem ${persona.nome} e precisa de ${diferencaDeAcerto[index]} ou mais para acertar, 
+                resultando em acertos ${chanceDeAcerto[index]}% das vezes com dano médio de ${d20.meanDamage(persona.dano).toFixed(2)} por ataque bem-sucedido, o 
+                que resulta em um dano médio de ${(chanceDeAcerto[index]*persona.dano).toFixed(2)} durante o combate.
+                 </div> </p> `).appendTo('#relatorioDeCombate');
         });
 
     });
@@ -96,8 +98,8 @@ $(document).ready(function(){
   
       party.forEach((personagemDaVez, index) => {
           if( (inimigos.defesa - personagemDaVez.ataque) > 0 ){
-            diferencaDeAcerto.push(inimigos.defesa - personagemDaVez.ataque);
-            chanceDeAcerto.push(100*(1 - (diferencaDeAcerto[index]/20)));
+            diferencaDeAcerto.push((inimigos.defesa - personagemDaVez.ataque));
+            chanceDeAcerto.push((100*(1 - (diferencaDeAcerto[index]/20))).toFixed(2));
           }
       });
   }
